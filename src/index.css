@@ -1,0 +1,137 @@
+@import url("https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,500;1,9..144,600&family=Inter:wght@400;500;600;700&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/*
+  Font system (Fraunces + Inter) — chosen after checking current award-site
+  typography patterns: an expressive variable serif for display/headings,
+  paired with a clean, highly-legible sans for body/UI. Both are real,
+  licensed Google Fonts, so they render identically on every OS (unlike
+  Copperplate, which was Apple-only).
+  - Headings / display: Fraunces (upright, bold weights)
+  - Subheadings / labels / emotion text: Fraunces Italic
+  - Body / inputs / buttons: Inter
+*/
+
+
+/* ===== Theme Variables per Drama Level — from the provided palette ===== */
+/* L1 Blue Lagoon -> L2 Rose Quartz -> L3 Crimson Tide -> L4 Red Mahogany -> L5 Espresso */
+/*
+  Color progression note: the original palette put a cool teal (Blue Lagoon)
+  at level 1 next to four warm reds at levels 2-5 — a big hue jump that reads
+  as jarring rather than a smooth escalation. This version keeps all five
+  levels in the same warm family (pale blush -> rose -> crimson -> mahogany ->
+  near-black) so it feels like one continuous "temperature rising" story.
+  Blue Lagoon is dropped from the level system but easy to bring back
+  elsewhere (e.g. as an alternate accent) if you want it preserved.
+*/
+[data-theme="1"] {
+  --theme-bg: #fbe4e4;
+  --theme-text: #6e1313;
+  --theme-accent: #a83232;
+  --theme-accent-hover: #8f2727;
+  --theme-card-bg: #fdf0f0;
+  --theme-border: #f0c8c8;
+  --theme-muted: #b56a6a;
+  --theme-slider-track: #f0c8c8;
+  --theme-glass-bg: rgba(110, 19, 19, 0.05);
+  --theme-glass-border: rgba(110, 19, 19, 0.14);
+  --theme-blob-1: #ffffff;
+  --theme-blob-2: #f4b3b3;
+}
+[data-theme="2"] {
+  --theme-bg: #f4b3b3;
+  --theme-text: #440000;
+  --theme-accent: #0f0000;
+  --theme-accent-hover: #2b0a0a;
+  --theme-card-bg: #fdd9d9;
+  --theme-border: #e89a9a;
+  --theme-muted: #6e1313;
+  --theme-slider-track: #e89a9a;
+  --theme-glass-bg: rgba(255, 255, 255, 0.35);
+  --theme-glass-border: rgba(68, 0, 0, 0.15);
+  --theme-blob-1: #ffffff;
+  --theme-blob-2: #6e1313;
+}
+[data-theme="3"] {
+  --theme-bg: #6e1313;
+  --theme-text: #f4b3b3;
+  --theme-accent: #f4b3b3;
+  --theme-accent-hover: #e89a9a;
+  --theme-card-bg: #7f1c1c;
+  --theme-border: #932626;
+  --theme-muted: #d98f8f;
+  --theme-slider-track: #932626;
+  --theme-glass-bg: rgba(244, 179, 179, 0.08);
+  --theme-glass-border: rgba(244, 179, 179, 0.2);
+  --theme-blob-1: #440000;
+  --theme-blob-2: #f4b3b3;
+}
+[data-theme="4"] {
+  --theme-bg: #440000;
+  --theme-text: #f4b3b3;
+  --theme-accent: #f4b3b3;
+  --theme-accent-hover: #e89a9a;
+  --theme-card-bg: #571010;
+  --theme-border: #6e1313;
+  --theme-muted: #c77;
+  --theme-slider-track: #6e1313;
+  --theme-glass-bg: rgba(244, 179, 179, 0.07);
+  --theme-glass-border: rgba(244, 179, 179, 0.18);
+  --theme-blob-1: #0f0000;
+  --theme-blob-2: #6e1313;
+}
+[data-theme="5"] {
+  --theme-bg: #0f0000;
+  --theme-text: #f4b3b3;
+  --theme-accent: #f4b3b3;
+  --theme-accent-hover: #d98f8f;
+  --theme-card-bg: #1a0505;
+  --theme-border: #440000;
+  --theme-muted: #a56464;
+  --theme-slider-track: #440000;
+  --theme-glass-bg: rgba(244, 179, 179, 0.05);
+  --theme-glass-border: rgba(244, 179, 179, 0.15);
+  --theme-blob-1: #440000;
+  --theme-blob-2: #6e1313;
+}
+
+body {
+  margin: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* shadcn/ui base tokens */
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 0 0% 3.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 3.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 3.9%;
+    --primary: 0 0% 9%;
+    --primary-foreground: 0 0% 98%;
+    --secondary: 0 0% 96.1%;
+    --secondary-foreground: 0 0% 9%;
+    --muted: 0 0% 96.1%;
+    --muted-foreground: 0 0% 45.1%;
+    --accent: 0 0% 96.1%;
+    --accent-foreground: 0 0% 9%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 0 0% 89.8%;
+    --input: 0 0% 89.8%;
+    --ring: 0 0% 3.9%;
+    --radius: 0.5rem;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+}
