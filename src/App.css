@@ -33,7 +33,7 @@ body,
   inset: 0;
   z-index: 3;
   pointer-events: none;
-  mix-blend-mode: screen;
+  mix-blend-mode: overlay;
 }
 
 /* ===== Intro splash sequence ===== */
@@ -115,7 +115,9 @@ body,
   }
 }
 
-/* ===== Animated background blobs ===== */
+/* ===== Animated background blobs (deliberately asymmetric — matched pairs
+   of identical circular blobs are one of the most common tells of a
+   templated/AI-generated background) ===== */
 .bg-blobs {
   position: fixed;
   inset: 0;
@@ -125,32 +127,64 @@ body,
 }
 .blob {
   position: absolute;
-  width: 42vw;
-  height: 42vw;
-  border-radius: 50%;
   filter: blur(90px);
-  opacity: 0.35;
   transition: background 900ms ease;
 }
 .blob-a {
-  top: -10%;
-  left: -10%;
+  top: -14%;
+  left: -8%;
+  width: 48vw;
+  height: 38vw;
+  border-radius: 42% 58% 63% 37% / 47% 41% 59% 53%;
+  opacity: 0.32;
   background: var(--theme-blob-1);
-  animation: drift-a 26s ease-in-out infinite;
+  animation: drift-a 29s ease-in-out infinite;
 }
 .blob-b {
-  bottom: -15%;
-  right: -10%;
+  bottom: -18%;
+  right: -14%;
+  width: 34vw;
+  height: 44vw;
+  border-radius: 63% 37% 41% 59% / 55% 48% 52% 45%;
+  opacity: 0.28;
+  filter: blur(110px);
   background: var(--theme-blob-2);
-  animation: drift-b 32s ease-in-out infinite;
+  animation: drift-b 34s ease-in-out infinite;
+}
+.blob-c {
+  top: 38%;
+  left: 58%;
+  width: 20vw;
+  height: 16vw;
+  border-radius: 50% 50% 45% 55% / 55% 45% 55% 45%;
+  opacity: 0.16;
+  filter: blur(70px);
+  background: var(--theme-blob-1);
+  animation: drift-c 22s ease-in-out infinite;
 }
 @keyframes drift-a {
-  0%, 100% { transform: translate(0, 0) scale(1); }
-  50% { transform: translate(6vw, 8vh) scale(1.15); }
+  0%, 100% { transform: translate(0, 0) scale(1) rotate(0deg); }
+  50% { transform: translate(6vw, 8vh) scale(1.12) rotate(8deg); }
 }
 @keyframes drift-b {
+  0%, 100% { transform: translate(0, 0) scale(1) rotate(0deg); }
+  50% { transform: translate(-5vw, -7vh) scale(1.08) rotate(-6deg); }
+}
+@keyframes drift-c {
   0%, 100% { transform: translate(0, 0) scale(1); }
-  50% { transform: translate(-5vw, -6vh) scale(1.1); }
+  50% { transform: translate(-4vw, 3vh) scale(1.2); }
+}
+
+/* Subtle grain — a flat blurred gradient with zero texture is another common
+   AI-generated tell. This is a static, low-opacity noise layer. */
+.grain-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  opacity: 0.06;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }
 
 /* ===== Header ===== */
@@ -416,7 +450,7 @@ body,
   background: linear-gradient(135deg, var(--theme-accent), var(--theme-accent-hover));
   color: var(--theme-bg);
   border: none;
-  border-radius: 18px;
+  border-radius: 6px 26px 6px 26px;
   padding: 1rem 2rem;
   font-size: 1.05rem;
   font-weight: 700;
@@ -441,7 +475,7 @@ body,
 .output-card {
   background: var(--theme-glass-bg);
   border: 1px solid var(--theme-glass-border);
-  border-radius: 20px;
+  border-radius: 6px 20px 20px 20px;
   overflow: hidden;
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
